@@ -1,21 +1,28 @@
-Simple Benchmark some ruby web serveur
-======================================
-http://ip:9292/hello
-response with abody of  50 or 5000 bytes
+Simple Benchmark for some ruby web serveur
+==========================================
+Measure node.js,thin,cuba,(femtows).
 
 install :
+----------
+<< ruby and node.js>>
  >gem install rack
+ 
  >gem install thin
+ 
  >gem install cuba
+ 
  >gem install femtowws
 
 Tuning linux
+--------------
 less WAIT_TIMEOUT...
+
  >sudo bash -c  "echo 30 >  /proc/sys/net/ipv4/tcp_fin_timeout "
-more port...
+ 
+more tcp ports...
  >sudo bash -c  "echo 15000 65000 >  /proc/sys/net/ipv4/ip_local_port_range" 
 
-Recycle port:
+Recycle tcp ports (experimental):
  #echo 1 > /proc/sys/net/ipv4/tcp_tw_recycle
  #echo 1 >/proc/sys/net/ipv4/tcp_tw_reuse
 
@@ -33,6 +40,9 @@ run.rb
   script for execute all tests
   ok for linux
   windows: rack-based server must be killed manualy (Process.kill("KILL") does not work...)
+
+wget.rb
+  my own http client tester, not very good, but work...
   
   
 Measures
