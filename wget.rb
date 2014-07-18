@@ -149,7 +149,7 @@ def prepeat(nbp,pack,*params)
  ipack=pack.to_i
  n=nbp.to_i*ipack*(params[0].to_i) 
  dur=chrono("avec #{n} requettes",n) { nbp.to_i.times { (1..ipack).map { Thread.new() {  repeat(*params)   } } .each { |th| th.join }  }}
- puts "Nombre de requettes par secondes : #{1000*n/dur}"
+ puts "Request/seconds : #{1000*n/dur}"
 end
 
 ####################################################################################

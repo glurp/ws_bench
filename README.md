@@ -10,42 +10,78 @@ install :
  >gem install femtowws
 
 Tuning linux
+less WAIT_TIMEOUT...
+ >sudo bash -c  "echo 30 >  /proc/sys/net/ipv4/tcp_fin_timeout "
+more port...
+ >sudo bash -c  "echo 15000 65000 >  /proc/sys/net/ipv4/ip_local_port_range" 
 
- sudo bash -c  "echo 30 >  /proc/sys/net/ipv4/tcp_fin_timeout "
- sudo bash -c  "echo 15000 65000 >  /proc/sys/net/ipv4/ip_local_port_range" 
+Recycle port:
+ #echo 1 > /proc/sys/net/ipv4/tcp_tw_recycle
+ #echo 1 >/proc/sys/net/ipv4/tcp_tw_reuse
 
 
 Contents
 ======
 
-app.rb  : cuba framework   ; >rackup
+app.rb  : cuba framework   ; >rackup -p 9293
   config.ru with app.rb
-tthin.ru : thin standalone;>thin start -R tthin.ru -p 9292
+tthin.ru : thin standalone;>thin start -R tthin.ru -p 9293
 appf.rb : femtows          ; >ruby appf.rb
+          a ws fullstack in 300 LOC, multithread,thread-pool
 
+run.rb
+  script for execute all tests
+  ok for linux
+  windows: rack-based server must be killed manualy (Process.kill("KILL") does not work...)
+  
+  
 Measures
 ========
 server Linux/xeon, 16 cores, 32GB (ovh)
   uname:  Linux 3.2.13-xxxx-std-ipv6-64 #1 SMP Wed Mar 28 11:20:17 UTC 2012
 
-  node.js 50 B/rq : 1606 rq/s 5 ms/rq (2*8*200 requettes)
-  femtows 50 B/rq : 1749 rq/s 2,2ms/rq
-  cuba    50 B/rq : 1202 rq/s (2*4*200 requettes)
-  thin    50 B/rq : 1817 rq/s 2ms/rq (2*4*100 requettes)
-  nota: too many port in TIME_WAIT with thin and cuba...
+********** Measures for 10000 request in 50 concurents clients ########
+*** ruby 1.9.3p0 (2011-10-30 revision 33570) [x86_64-linux]
+{"node.js 50B/r"=>"Request/seconds : 1665.3826467396939",
+ "thin    50B/r"=>"Request/seconds : 1766.432623586888",
+ "cuba    50B/r"=>"Request/seconds : 1903.7570332119794",
+ "femtows 50B/r"=>"Request/seconds : 1777.778079186008",
+ 
+ "node.js 5000B/r"=>"Request/seconds : 1645.2504114004687",
+ "thin    5000B/r"=>"Request/seconds : 1715.6849029853372",
+ "cuba    5000B/r"=>"Request/seconds : 1670.2237650916518",
+ "femtows 5000B/r"=>"Request/seconds : 1812.8498311025314"}
+ 
 
-  node.js 5000 B/rq : 1587 rq/s 5 ms/rq (2*8*200 requettes)
-  femtows 5000 B/rq : 1803 rq/s 4.3ms/rq (2*8*200 requettes)
-  cuba    5000 B/rq : 1578 rq/s 5ms/rq (2*8*200 requettes)
-  thin    5000 B/rq : 1702 rq/s 4.6 ms/rq (2*8*200 requettes)
+Ubuntu in virtualbox in Core i7 /host windows
 
-virtualbox in Core i7 /host windows, 5000 B/response 
-  femtows : 1206 r/s
-  cuba :     896 r/s
-  thin :    1237 r/s
+********** Measures for 10000 request in 50 concurents clients ########
+*** ruby 1.9.3p484 (2013-11-22 revision 43786) [i686-linux]
+{"node.js 50B/r"=>"Request/seconds : 1277.7747347103582",
+ "thin    50B/r"=>"Request/seconds : 1350.210535810596",
+ "cuba    50B/r"=>"Request/seconds : 965.419317464408",
+ "femtows 50B/r"=>"Request/seconds : 1358.9813782824401",
+ 
+ "node.js 5000B/r"=>"Request/seconds : 1221.8282527625038",
+ "thin    5000B/r"=>"Request/seconds : 1309.8024015550607",
+ "cuba    5000B/r"=>"Request/seconds : 895.9974652415458",
+ "femtows 5000B/r"=>"Request/seconds : 1285.8017645231191"}
 
-virutalbox in Core i7 /windows, 50 B/response 
-  femtows :  1253 r/s
-  cuba :      957 r/s
-  thin :     1266 r/s
+Same machine, on windows, native
 
+********** Measures for 10000 request in 50 concurents clients ########
+*** ruby 2.0.0p0 (2013-02-24) [i386-mingw32]
+{"node.js 50B/r"=>"Request/seconds : 678.8695275290775",
+ "thin    50B/r"=>"Request/seconds : 653.917794521648",
+ "cuba    50B/r"=>"Request/seconds : 590.5401286369",
+ "femtows 50B/r"=>"Request/seconds : 728.2131011702199",
+ 
+ "node.js 5000B/r"=>"Request/seconds : 684.282091405402",
+ "thin    5000B/r"=>"Request/seconds : 659.4380784178558",
+ "cuba    5000B/r"=>"Request/seconds : 612.7799420834898",
+ "femtows 5000B/r"=>"Request/seconds : 701.1486436381608"}
+ 
+
+License
+=======
+GPL

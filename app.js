@@ -1,6 +1,6 @@
 var http = require('http');
 size=parseInt(process.env['SIZER'])
-data=""; for (var i=0;i<5000;i++) data+="*";
+data=""; for (var i=0;i<size;i++) data+="*";
 
 http.createServer( function (request, response) {
 		response.writeHead(200, {'Content-Type': 'text/html'});
