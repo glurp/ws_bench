@@ -93,6 +93,8 @@ Linux  3.2.0-67-generic #101-Ubuntu SMP i686 i686 i386 GNU/Linux
 nota cuba is penalized by hs log (redirect on/dev/null...) 
 
 Ubuntu in virtualbox in Core i7 /host windows
+---
+tests with wget.rb, no good....
 
 ```
 ********** Measures for 10000 request in 50 concurents clients ########
@@ -108,6 +110,8 @@ Ubuntu in virtualbox in Core i7 /host windows
  "femtows 5000B/r"=>"Request/seconds : 1285.8017645231191"}
 ```
 Same machine, on windows, native
+---
+tests with wget.rb, no good....
 
 ```
 ********** Measures for 10000 request in 50 concurents clients ########
