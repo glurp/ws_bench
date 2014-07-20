@@ -51,6 +51,7 @@ wget.rb
 Measures
 ========
 server Linux/xeon, 16 cores, 32GB (ovh)
+---
 * uname:  Linux 3.2.13-xxxx-std-ipv6-64 #1 SMP Wed Mar 28 11:20:17 UTC 2012
 ```
 ********** Measures for 20000 request in 100 concurents clients ########
@@ -70,8 +71,10 @@ server Linux/xeon, 16 cores, 32GB (ovh)
 ```
 nota cuba is penalized by hs log (redirect on/dev/null...) 
 
-``` 
 Ubuntu on laptop
+---
+
+``` 
 Linux  3.2.0-67-generic #101-Ubuntu SMP i686 i686 i386 GNU/Linux
 {"node.js 50B/r"=>"Requests per second:    5267.88 [#/sec] (mean)",
  "express 50B/r"=>"Requests per second:    5202.25 [#/sec] (mean)",
