@@ -53,6 +53,8 @@ wait_free_netport(50)
 nbt=(ARGV[0]||"8").to_i
 nbr=(ARGV[1]||"100").to_i
 
+puts "********** Measures for #{nbr} requests in #{nbt} concurents clients ########"
+
 #cmd_client="ruby wget.rb prepeat 2 #{nbt} #{nbr} get http://127.0.0.1:9293/hello"
 cmd_client="ab -r -c  #{nbt} -n #{nbr} http://127.0.0.1:9293/hello"
 

@@ -54,20 +54,20 @@ server Linux/xeon, 16 cores, 32GB (ovh)
 ---
 * uname:  Linux 3.2.13-xxxx-std-ipv6-64 #1 SMP Wed Mar 28 11:20:17 UTC 2012
 ```
-********** Measures for 20000 request in 100 concurents clients ########
+********** Measures for 10000 request in 100 concurents clients ########
 *** ruby 1.9.3p0 (2011-10-30 revision 33570) [x86_64-linux]
-{"node.js 50B/r"=>"Requests per second:     6654.16 [#/sec] (mean)",
- "express 50B/r"=>"Requests per second:     6588.66 [#/sec] (mean)",
- "thin    50B/r"=>"Requests per second:    11140.70 [#/sec] (mean)",
- "cuba    50B/r"=>"Requests per second:     2388.23 [#/sec] (mean)",
- "femtows 50B/r"=>"Requests per second:     1737.91 [#/sec] (mean)",
+{"node.js 50B/r"=>"Requests per second:     8880.98 [#/sec] (mean)",
+ "express 50B/r"=>"Requests per second:     9752.86 [#/sec] (mean)",
+ "thin    50B/r"=>"Requests per second:    12699.54 [#/sec] (mean)",
+ "cuba    50B/r"=>"echec",
 
- "node.js 5000B/r"=>"Requests per second:    5925.29 [#/sec] (mean)",
- "express 5000B/r"=>"Requests per second:    5719.78 [#/sec] (mean)",
- "thin    5000B/r"=>"Requests per second:   10596.59 [#/sec] (mean)",
- "cuba    5000B/r"=>"Requests per second:    2103.84 [#/sec] (mean)",
- "femtows 5000B/r"=>"Requests per second:    3487.86 [#/sec] (mean)"
-}
+ "femtows 50B/r"=>"Requests per second:      3710.73 [#/sec] (mean)",
+ "node.js 5000B/r"=>"Requests per second:    8309.31 [#/sec] (mean)",
+ "express 5000B/r"=>"Requests per second:    8515.91 [#/sec] (mean)",
+ "thin    5000B/r"=>"Requests per second:   11968.44 [#/sec] (mean)",
+ "cuba    5000B/r"=>"Requests per second:    2150.61 [#/sec] (mean)",
+ "femtows 5000B/r"=>"Requests per second:    3563.59 [#/sec] (mean)"}
+
 ```
 nota cuba is penalized by hs log (redirect on/dev/null...) 
 
@@ -110,7 +110,7 @@ tests with wget.rb, no good....
  "femtows 5000B/r"=>"Request/seconds : 1285.8017645231191"}
 ```
 Same machine, on windows, native
----
+
 tests with wget.rb, no good....
 
 ```
