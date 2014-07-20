@@ -53,17 +53,22 @@ Measures
 server Linux/xeon, 16 cores, 32GB (ovh)
 * uname:  Linux 3.2.13-xxxx-std-ipv6-64 #1 SMP Wed Mar 28 11:20:17 UTC 2012
 ```
-********** Measures for 10000 request in 50 concurents clients ########
+********** Measures for 20000 request in 100 concurents clients ########
 *** ruby 1.9.3p0 (2011-10-30 revision 33570) [x86_64-linux]
-{"node.js 50B/r"=>"Request/seconds : 1665.3826467396939",
- "thin    50B/r"=>"Request/seconds : 1766.432623586888",
- "cuba    50B/r"=>"Request/seconds : 1903.7570332119794",
- "femtows 50B/r"=>"Request/seconds : 1777.778079186008",
- 
- "node.js 5000B/r"=>"Request/seconds : 1645.2504114004687",
- "thin    5000B/r"=>"Request/seconds : 1715.6849029853372",
- "cuba    5000B/r"=>"Request/seconds : 1670.2237650916518",
- "femtows 5000B/r"=>"Request/seconds : 1812.8498311025314"}
+{"node.js 50B/r"=>"Requests per second:     6654.16 [#/sec] (mean)",
+ "express 50B/r"=>"Requests per second:     6588.66 [#/sec] (mean)",
+ "thin    50B/r"=>"Requests per second:    11140.70 [#/sec] (mean)",
+ "cuba    50B/r"=>"Requests per second:     2388.23 [#/sec] (mean)",
+ "femtows 50B/r"=>"Requests per second:     1737.91 [#/sec] (mean)",
+
+ "node.js 5000B/r"=>"Requests per second:    5925.29 [#/sec] (mean)",
+ "express 5000B/r"=>"Requests per second:    5719.78 [#/sec] (mean)",
+ "thin    5000B/r"=>"Requests per second:   10596.59 [#/sec] (mean)",
+ "cuba    5000B/r"=>"Requests per second:    2103.84 [#/sec] (mean)",
+ "femtows 5000B/r"=>"Requests per second:    3487.86 [#/sec] (mean)"
+}
+nota cuba is penalized by hs log (redirect on/dev/null...) 
+
 ``` 
 Ubuntu on laptop
 Linux  3.2.0-67-generic #101-Ubuntu SMP i686 i686 i386 GNU/Linux
@@ -76,9 +81,11 @@ Linux  3.2.0-67-generic #101-Ubuntu SMP i686 i686 i386 GNU/Linux
  "node.js 5000B/r"=>"Requests per second:    4053.96 [#/sec] (mean)",
  "express 5000B/r"=>"Requests per second:    4074.06 [#/sec] (mean)",
  "thin    5000B/r"=>"Requests per second:    4766.44 [#/sec] (mean)",
- "cuba    5000B/r"=>"Requests per second:    976.08 [#/sec] (mean)",
+ "cuba    5000B/r"=>"Requests per  second:    976.08 [#/sec] (mean)",
  "femtows 5000B/r"=>"Requests per second:    3663.92 [#/sec] (mean)"
 }
+
+nota cuba is penalized by hs log (redirect on/dev/null...) 
 
 Ubuntu in virtualbox in Core i7 /host windows
 
