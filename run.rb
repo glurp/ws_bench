@@ -13,7 +13,8 @@ require 'pp'
 $res={}
 def register(name,out)
   if out
-	  perf=out.split(/\r?\n/).grep(/Request\/seconds/)[0]
+	  perf=out.split(/\r?\n/).grep(/Request\/seconds/)[0] # wget.rb
+	  perf=out.split(/\r?\n/).grep(/Requests\s+per\s+second/)[0]  #ab 
 	  puts "#{name} : #{perf}"
   else
 	  perf="echec"
@@ -33,7 +34,7 @@ def run_test(name,size,timeout,srv_cmd,client_cmd)
   out=nil
   ps=Process.spawn({'SIZER'=>size.to_s},srv_cmd) 
   puts "sleep after server run.."
-  sleep 6
+  sleep 2
   puts `netstat -an | grep :9293 | grep LISTEN`
   puts "run client..."
   thc=Thread.new { out=`#{client_cmd}`}
@@ -51,15 +52,20 @@ wait_free_netport(50)
 
 nbt=(ARGV[0]||"8").to_i
 nbr=(ARGV[1]||"100").to_i
-cmd_client="ruby wget.rb prepeat 2 #{nbt} #{nbr} get http://127.0.0.1:9293/hello"
+
+#cmd_client="ruby wget.rb prepeat 2 #{nbt} #{nbr} get http://127.0.0.1:9293/hello"
+cmd_client="ab -r -c  #{nbt} -n #{nbr} http://127.0.0.1:9293/hello"
+
 run_test "node.js 50B/r",50,30,"node app.js"                   ,cmd_client
+run_test "express 50B/r",50,30,"node app.js"                   ,cmd_client
 run_test "thin    50B/r",50,30,"thin start -R tthin.ru -p 9293",cmd_client
-run_test "cuba    50B/r",50,30,"rackup -p 9293"                ,cmd_client
+run_test "cuba    50B/r",50,30,"rackup -p 9293 2>/dev/null"     ,cmd_client
 run_test "femtows 50B/r",50,30,"ruby appf.rb"                  ,cmd_client
 
 run_test "node.js 5000B/r",5000,120,"node app.js"                   ,cmd_client
+run_test "express 5000B/r",5000,120,"node app.js"                   ,cmd_client
 run_test "thin    5000B/r",5000,120,"thin start -R tthin.ru -p 9293",cmd_client
-run_test "cuba    5000B/r",5000,120,"rackup -p 9293"                ,cmd_client
+run_test "cuba    5000B/r",5000,120,"rackup -p 9293 2>/dev/null"    ,cmd_client
 run_test "femtows 5000B/r",5000,120,"ruby appf.rb"                  ,cmd_client
 puts
 puts

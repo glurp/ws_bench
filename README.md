@@ -5,13 +5,10 @@ Measure node.js,thin,cuba,(femtows).
 install :
 ----------
 << ruby and node.js>>
- >gem install rack
+ >gem install rack thin cuba femtows
  
- >gem install thin
+ >npm install -g express
  
- >gem install cuba
- 
- >gem install femtowws
 
 Tuning linux
 --------------
@@ -31,6 +28,8 @@ Recycle tcp ports (experimental):
 Contents
 ======
 
+express.js : little server un nore.js/express
+
 app.rb  : cuba framework   ; >rackup -p 9293
   config.ru with app.rb
   
@@ -46,6 +45,7 @@ run.rb
 
 wget.rb
 *  my own http client tester, not very good, but work...
+
   
   
 Measures
@@ -65,6 +65,20 @@ server Linux/xeon, 16 cores, 32GB (ovh)
  "cuba    5000B/r"=>"Request/seconds : 1670.2237650916518",
  "femtows 5000B/r"=>"Request/seconds : 1812.8498311025314"}
 ``` 
+Ubuntu on laptop
+Linux  3.2.0-67-generic #101-Ubuntu SMP i686 i686 i386 GNU/Linux
+{"node.js 50B/r"=>"Requests per second:    5267.88 [#/sec] (mean)",
+ "express 50B/r"=>"Requests per second:    5202.25 [#/sec] (mean)",
+ "thin    50B/r"=>"Requests per second:    4864.63 [#/sec] (mean)",
+ "cuba    50B/r"=>"Requests per second:    1094.73 [#/sec] (mean)",
+ "femtows 50B/r"=>nil,
+
+ "node.js 5000B/r"=>"Requests per second:    4053.96 [#/sec] (mean)",
+ "express 5000B/r"=>"Requests per second:    4074.06 [#/sec] (mean)",
+ "thin    5000B/r"=>"Requests per second:    4766.44 [#/sec] (mean)",
+ "cuba    5000B/r"=>"Requests per second:    976.08 [#/sec] (mean)",
+ "femtows 5000B/r"=>"Requests per second:    3663.92 [#/sec] (mean)"
+}
 
 Ubuntu in virtualbox in Core i7 /host windows
 
