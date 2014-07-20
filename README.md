@@ -67,6 +67,7 @@ server Linux/xeon, 16 cores, 32GB (ovh)
  "cuba    5000B/r"=>"Requests per second:    2103.84 [#/sec] (mean)",
  "femtows 5000B/r"=>"Requests per second:    3487.86 [#/sec] (mean)"
 }
+```
 nota cuba is penalized by hs log (redirect on/dev/null...) 
 
 ``` 
@@ -84,6 +85,7 @@ Linux  3.2.0-67-generic #101-Ubuntu SMP i686 i686 i386 GNU/Linux
  "cuba    5000B/r"=>"Requests per  second:    976.08 [#/sec] (mean)",
  "femtows 5000B/r"=>"Requests per second:    3663.92 [#/sec] (mean)"
 }
+```
 
 nota cuba is penalized by hs log (redirect on/dev/null...) 
 
